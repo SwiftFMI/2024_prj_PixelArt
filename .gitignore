@@ -1,0 +1,54 @@
+# Xcode specific
+.DS_Store
+build/
+DerivedData/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xccheckout
+
+# Swift Package Manager
+Package.resolved
+.swiftpm/
+.build/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Checkouts
+Carthage/Build/
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/
+fastlane/test_output/
+
+# Firebase
+GoogleService-Info.plist
+
+# Ignore temporary Xcode project settings
+xcshareddata/WorkspaceSettings.xcsettings
+
+# Ignore generated scheme files
+*.xcscheme
+xcuserdata/
+
+# Ignore Xcode Playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# Ignore environment-specific settings
+.env
+
+# Ignore simulator logs
+*.log
+*.xcdebugger
