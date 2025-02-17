@@ -1,17 +1,27 @@
 //
 //  PixelArtApp.swift
-//  PixelArt
+//  PixelArtApp
 //
-//  Created by vnc003 on 16.02.25.
+//  Created by Ivaylo Atanasov on 8.01.25.
 //
 
 import SwiftUI
 
 @main
 struct PixelArtApp: App {
+    @StateObject var loggedUserVM = LoggedUserViewModel()
+    
+    init() {
+        Firebase.configure()
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            if loggedUserVM.session != nil {
+                MainMenuScreen()
+            } else {
+                MainUnregisteredScreen
+            }
         }
     }
 }

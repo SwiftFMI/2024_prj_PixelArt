@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct MainUnregisteredView: View {
+struct MainUnregisteredScreen: View {
     var body: some View {
         NavigationStack {
             VStack {
@@ -47,19 +47,6 @@ struct MainUnregisteredView: View {
         }
     }
 }
-
-struct LoginView: View {
-    var body: some View {
-        Text("Login Screen")
-    }
-}
-
-struct SignUpView: View {
-    var body: some View {
-        Text("Sign Up Screen")
-    }
-}
-
 
 #Preview {
     MainUnregisteredView()
