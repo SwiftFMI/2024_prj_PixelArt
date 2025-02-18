@@ -11,25 +11,26 @@ class LoggedUserViewModel: ObservableObject {
     
     init() {
         session = Auth.auth().currentUser
+        
     }
 
     func signIn(email: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
             session = authResult.user
-            getUserData(uid: result.user.uid)
+            await getUserData(uid: authResult.user.uid)
         } catch {
             authError = "Failed to sign in: \(error.localizedDescription)"
         }
     }
     
-    private func getUserData(uid: String) {
-        if uid == nil {
-            return
-        }
+    private func getUserData(uid: String) async {
         do {
-            let snapshot = try await db.collection(self.usersCollectionName).getDocument(uid)
-            self.user = try snapshot.data(as: User.self)
+            //let snapshot = try await db.collection(self.usersCollectionName).getDocument(uid)
+            let snapshot = try await db.collection(self.usersCollectionName).document(uid).getDocument(completion: { document, error in
+                print("completed")
+            })
+            //self.user = try snapshot
         } catch {
             authError = "Failed to sign in: \(error.localizedDescription)"
         }
@@ -39,16 +40,16 @@ class LoggedUserViewModel: ObservableObject {
         do {
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
             session = authResult.user
-            self.user = User(id: session.uid, username: username, email: email, createdOn: Date(), completedPixelArts: [])
+            self.user = User(id: session!.uid, username: username, email: email, createdOn: Date(), completedPixelArts: [])
             
-            try await createNewUser(user: user)
+            try await createNewUser(user: user!)
         } catch {
             authError = "Failed to register: \(error.localizedDescription)"
         }
     }
     
     private func createNewUser(user: User) async throws {
-        try db.collection("users").document(self.session.uid).setData(from: user)
+        try db.collection("users").document(self.session!.uid).setData(from: user)
     }
     
     func logOut() {
