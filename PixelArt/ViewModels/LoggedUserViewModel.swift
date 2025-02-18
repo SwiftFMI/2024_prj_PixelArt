@@ -6,13 +6,13 @@ class LoggedUserViewModel: ObservableObject {
     @Published var authError: String?
     
     init() {
-        self.userSession = Auth.auth().currentUser
+        self.session = Auth.auth().currentUser
     }
 
     func signIn(email: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
-            self.session = result.user
+            self.session = authResult.user
         } catch {
             authError = "Failed to sign in: \(error.localizedDescription)"
         }
@@ -21,7 +21,7 @@ class LoggedUserViewModel: ObservableObject {
     func register(email: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            self.session = result.user
+            self.session = authResult.user
         } catch {
             authError = "Failed to register: \(error.localizedDescription)"
         }

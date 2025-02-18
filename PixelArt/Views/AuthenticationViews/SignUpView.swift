@@ -5,7 +5,7 @@ struct SignUpView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isLoading: Bool = false
-    @EnvironmentObject var LoggedUserViewModel: loggedUserVM
+    @EnvironmentObject var loggedUserVM: LoggedUserViewModel
     
     var body: some View {
         VStack {
@@ -25,7 +25,7 @@ struct SignUpView: View {
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
-            SecureField("Password", text: password)
+            SecureField("Password", text: $password)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
@@ -58,7 +58,7 @@ struct SignUpView: View {
     private func signUpUser() {
         isLoading = true
         Task {
-            await loggedUserVM.register(email: email, password: password)
+            try await loggedUserVM.register(email: email, password: password)
             isLoading = false
         }
     }
