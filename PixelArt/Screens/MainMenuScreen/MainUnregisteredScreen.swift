@@ -47,7 +47,3 @@ struct MainUnregisteredScreen: View {
         }
     }
 }
-
-#Preview {
-    MainUnregisteredView()
-}

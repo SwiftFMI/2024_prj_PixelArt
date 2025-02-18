@@ -10,13 +10,13 @@ class LoggedUserViewModel: ObservableObject {
     let usersCollectionName = "users"
     
     init() {
-        self.userSession = Auth.auth().currentUser
+        session = Auth.auth().currentUser
     }
 
     func signIn(email: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().signIn(withEmail: email, password: password)
-            self.session = result.user
+            session = authResult.user
             getUserData(uid: result.user.uid)
         } catch {
             authError = "Failed to sign in: \(error.localizedDescription)"
@@ -38,8 +38,7 @@ class LoggedUserViewModel: ObservableObject {
     func register(username: String, email: String, password: String) async throws {
         do {
             let authResult = try await Auth.auth().createUser(withEmail: email, password: password)
-            self.session = result.user
-            
+            session = authResult.user
             self.user = User(id: session.uid, username: username, email: email, createdOn: Date(), completedPixelArts: [])
             
             try await createNewUser(user: user)

@@ -20,31 +20,16 @@ struct PaletteView: View {
     var body: some View {
         VStack {
             ScrollView(.horizontal) {
-                HStack {
+                HStack(spacing: 0) {
                     ForEach(palette, id: \.self) { palCol in
                         Button {
                             currentColor = palCol
                         } label: {
-                            Text(String(palCol.id))
-                                .padding(.all, 8)
-                                .border(Color(palCol.color), width: 4)
-                                .foregroundStyle(Color.black)
-                                .font(Font.system(size: 20.0))
-                                .presentationCornerRadius(15)
-                                .padding(.all, 8)
+                            PaletteSingeColorView(color: palCol, selectedColor: $currentColor)
                         }
                     }
                 }
             }
-            Color(currentColor.color)
-                .frame(height: 20.0)
         }
-        .background(Color(UIColor(named: "PixelLightGray")!))
-        .clipShape(
-            RoundedRectangle(
-                cornerRadius: 8
-            )
-        )
-        .padding(.all, 16)
     }
 }

@@ -6,19 +6,22 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct PixelArtApp: App {
     @StateObject var loggedUserVM = LoggedUserViewModel()
     
     init() {
-        Firebase.configure()
+        FirebaseApp.configure()
     }
     
     var body: some Scene {
         WindowGroup {
             if loggedUserVM.session != nil {
-                MainMenuScreen()
+                NavigationStack {
+                    MainMenuScreen()
+                }
             } else {
                 MainUnregisteredScreen()
             }

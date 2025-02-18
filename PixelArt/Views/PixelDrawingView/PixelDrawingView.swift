@@ -12,7 +12,9 @@ struct PixelDrawingView: View {
     var pixelCountX: CGFloat
     var pixelCountY: CGFloat
     let pixelSize: CGFloat = 16
-    
+   
+    @Environment(\.dismiss) private var dismiss
+    @State private var isVictory = false
     @Binding var currentSelectedColor: PaletteColor
     
     @State private var boolArr: [[Int]] = [[Int]](repeating: [Int](repeating: 0, count: 16), count: 16)
@@ -55,7 +57,7 @@ struct PixelDrawingView: View {
                                         if (currentViewPixelPicture.getDataAt(x: i-1, y: j-1) == currentSelectedColor.id) {
                                             boolArr[i-1][j-1] = -1
                                             self.victoryCheck()
-                                        } else {
+                                        } else if (self.boolArr[i-1][j-1] != -1){
                                             boolArr[i-1][j-1] += 1
                                         }
                                     }
@@ -67,8 +69,14 @@ struct PixelDrawingView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .sensoryFeedback(.impact(weight: .heavy, intensity: 5), trigger: hapticTrigger)
+        }.alert("Congratulations !!!\nYou completed the Draw!", isPresented: $isVictory) {
+            Button("Return to Menu", role: .cancel) {dismiss()}
+            Button("Admire") {}
         }
     }
+    
+    
+    
     func rectReader(indexI: Int, indexJ: Int) -> some View {
        return GeometryReader { (geometry) -> AnyView in
            if geometry.frame(in: .global).contains(self.location) && !shouldPan && self.location != .zero {
@@ -76,7 +84,7 @@ struct PixelDrawingView: View {
                    if (currentViewPixelPicture.getDataAt(x: indexI-1, y: indexJ-1) == currentSelectedColor.id) {
                        self.boolArr[indexI-1][indexJ-1] = -1
                        self.victoryCheck()
-                   } else {
+                   } else if (self.boolArr[indexI-1][indexJ-1] != -1){
                        self.boolArr[indexI-1][indexJ-1] += 1
                    }
                }
@@ -85,17 +93,15 @@ struct PixelDrawingView: View {
        }
     }
     func victoryCheck() {
-        // having difficulty with this as of now
-//        print(boolArr)
-//        var flag = true
-//        for row in boolArr {
-//            for item in row {
-//                if item != -1 {flag = false}
-//            }
-//        }
-//        if(flag) {
-//            print("VICTORY")
-//        }
+        var flag = true
+        for row in boolArr {
+            for item in row {
+                if item != -1 {flag = false}
+            }
+        }
+        if(flag) {
+            isVictory = true
+        }
     }
 }
 

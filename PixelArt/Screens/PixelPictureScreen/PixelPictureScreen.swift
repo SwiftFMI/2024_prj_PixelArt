@@ -22,15 +22,14 @@ struct PixelPictureScreen: View {
             VStack {
                 PixelDrawingView(picture: self.currentScreenPixelPicture, currentColor: $currentSelectedColor)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .border(Color.red)
+                    //.border(/*@START_MENU_TOKEN@*/Color.black/*@END_MENU_TOKEN@*/)
             }
             VStack {
                 PaletteView(palette: currentScreenPixelPicture.palette, currentColor: $currentSelectedColor)
-                    .border(Color.green)
+                    //.border(Color.green)
                 Spacer()
             }
         }
-        .padding()
         .navigationTitle(self.currentScreenPixelPicture.name)
     }
 }

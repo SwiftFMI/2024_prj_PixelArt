@@ -39,20 +39,21 @@ struct PixelSquare: View {
                 if(isColored < 0) {
                     withAnimation(.easeIn(duration: 0.1)) {
                         self.backCol = Color.white
+                        //self.text = String(isColored)
                         self.text = ""
                     }
                     withAnimation(.easeIn(duration: 0.1).delay(0.1)) {
                         self.backCol = Color(currentSelectedColor.color)
                     }
                 } else if(self.text != "") {
-                    withAnimation(.easeIn(duration: 0.1)) {
-                        self.backCol = Color.white
-                    }
-                    withAnimation(.easeIn(duration: 0.1).delay(0.1)) {
+//                    withAnimation(.easeIn(duration: 0.1)) {
+//                        self.backCol = Color.white
+//                    }
+//                    withAnimation(.easeIn(duration: 0.1).delay(0.1)) {
                         self.backCol = Color(currentSelectedColor.color).opacity(0.5)
-                    }
+                    //}
                 }
             }
-            //.sensoryFeedback(.impact(flexibility: .soft, intensity: 1), trigger: isColored < 0)
+            .sensoryFeedback(.impact(flexibility: .soft, intensity: 1), trigger: isColored < 0)
     }
 }
