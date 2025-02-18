@@ -21,7 +21,7 @@ struct SignUpView: View {
                 .autocapitalization(.none)
                 .padding()
             
-            TextField("Email", text: $username)
+            TextField("Username", text: $username)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .padding()
             
@@ -58,7 +58,7 @@ struct SignUpView: View {
     private func signUpUser() {
         isLoading = true
         Task {
-            await loggedUserVM.register(email: email, password: password)
+            await loggedUserVM.register(username: username, email: email, password: password)
             isLoading = false
         }
     }

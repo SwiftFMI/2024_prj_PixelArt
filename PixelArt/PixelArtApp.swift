@@ -20,7 +20,7 @@ struct PixelArtApp: App {
             if loggedUserVM.session != nil {
                 MainMenuScreen()
             } else {
-                MainUnregisteredScreen
+                MainUnregisteredScreen()
             }
         }
     }
