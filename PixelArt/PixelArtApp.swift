@@ -23,9 +23,6 @@ struct PixelArtApp: App {
                     MainMenuScreen()
                 }
             } else {
-//                NavigationStack {
-//                    MainMenuScreen()
-//                }
                 MainUnregisteredScreen()
             }
         }
