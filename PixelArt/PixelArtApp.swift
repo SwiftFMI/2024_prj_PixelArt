@@ -10,7 +10,7 @@ import Firebase
 
 @main
 struct PixelArtApp: App {
-    @EnvironmentObject var loggedUserVM = LoggedUserViewModel()
+    @StateObject var loggedUserVM = LoggedUserViewModel()
     
     init() {
         FirebaseApp.configure()
@@ -23,6 +23,9 @@ struct PixelArtApp: App {
                     MainMenuScreen()
                 }
             } else {
+//                NavigationStack {
+//                    MainMenuScreen()
+//                }
                 MainUnregisteredScreen()
             }
         }
