@@ -11,7 +11,6 @@ class LoggedUserViewModel: ObservableObject {
     
     init() {
         session = Auth.auth().currentUser
-        
     }
 
     func signIn(email: String, password: String) async throws {
@@ -56,5 +55,9 @@ class LoggedUserViewModel: ObservableObject {
         } catch {
             authError = "Failed to log out: \(error.localizedDescription)"
         }
+    }
+    
+    func resetErrorStatus() {
+        authError = ""
     }
 }

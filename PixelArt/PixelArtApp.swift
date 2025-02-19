@@ -11,6 +11,7 @@ import Firebase
 @main
 struct PixelArtApp: App {
     @StateObject var loggedUserVM = LoggedUserViewModel()
+    @StateObject var pixelArtsViewModel = PixelArtsViewModel()
     
     init() {
         FirebaseApp.configure()
@@ -21,5 +22,6 @@ struct PixelArtApp: App {
             ContentView()
         }
         .environmentObject(loggedUserVM)
+        .environmentObject(pixelArtsViewModel)
     }
 }
