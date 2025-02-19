@@ -7,22 +7,30 @@
 
 import SwiftUI
 
-struct PaletteColor: Hashable {
-    let id: Int
-    let color: UIColor
-}
 
-struct PixelPictureDataModel {
+struct PixelPictureData: Codable {
     let id: String
     let name: String
+    let createdBy: String
+    let createdOn: Date
     let width: Int
     let height: Int
     let palette: [PaletteColor]
     let pixelData: [Int]
     
-    init(id: String, name: String, width: Int, height: Int, palette: [PaletteColor], pixelData: [Int]) {
+    init(id: String,
+         name: String,
+         createdBy: String,
+         createdOn: Date,
+         width: Int,
+         height: Int,
+         palette: [PaletteColor],
+         pixelData: [Int]) {
+        
         self.id = id
         self.name = name
+        self.createdBy = createdBy
+        self.createdOn = createdOn
         self.width = width
         self.height = height
         self.palette = palette
