@@ -55,6 +55,7 @@ struct LoginView: View {
         Task {
             try await loggedUserVM.signIn(email: email, password: password)
             isLoading = false
+            loggedUserVM.resetErrorStatus()
             ContentView()
         }
     }
