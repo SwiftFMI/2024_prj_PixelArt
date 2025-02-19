@@ -15,22 +15,31 @@ struct PixelSquare: View {
     @Binding private var isColored: Int
     @Binding var currentSelectedColor: PaletteColor
     private var squareSize: CGFloat
+    private var palette: [PaletteColor]
     
-    init(squareSize: CGFloat, isColored: Binding<Int>, colorNum: Int, currentColor: Binding<PaletteColor>) {
+    init(squareSize: CGFloat, isColored: Binding<Int>, colorNum: Int, palette: [PaletteColor], currentColor: Binding<PaletteColor>) {
         self.squareSize = squareSize
         self._isColored = isColored
         self.text = .init(String(colorNum))
         self._currentSelectedColor = currentColor
+        self.palette = palette
     }
     
     var squareBackView: some View {
         Rectangle()
-            .fill(backCol)
+            .fill(isColored == 0 || isColored >= palette.count
+                  ? backCol
+                  : (isColored < 0
+                     ? Color(uiColor: UIColor(hex: palette[-isColored-1].color) ?? UIColor(backCol)).opacity(1)
+                     : Color(uiColor: (UIColor(hex: palette[isColored-1].color)) ?? UIColor(backCol)).opacity(0.5)
+                    )
+                  
+            )
             //.border(isColored < 0 ? backCol : Color.white, width: 1)
     }
     
     var body: some View {
-        Text(text)
+        Text(isColored < 0 ? "" : text)
             .frame(width: squareSize, height: squareSize)
             .foregroundStyle(Color.black)
             .font(Font.system(size: 10.0))
@@ -43,14 +52,14 @@ struct PixelSquare: View {
                         self.text = ""
                     }
                     withAnimation(.easeIn(duration: 0.1).delay(0.1)) {
-                        self.backCol = Color(currentSelectedColor.color)
+                        self.backCol = Color(uiColor: UIColor(hex: currentSelectedColor.color) ?? .white)
                     }
                 } else if(self.text != "") {
 //                    withAnimation(.easeIn(duration: 0.1)) {
 //                        self.backCol = Color.white
 //                    }
 //                    withAnimation(.easeIn(duration: 0.1).delay(0.1)) {
-                        self.backCol = Color(currentSelectedColor.color).opacity(0.5)
+                        self.backCol = Color(uiColor: UIColor(hex: currentSelectedColor.color) ?? .white).opacity(0.5)
                     //}
                 }
             }

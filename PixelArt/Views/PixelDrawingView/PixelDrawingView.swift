@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct PixelDrawingView: View {
-    var currentViewPixelPicture: PixelPictureDataModel
+    var currentViewPixelPicture: PixelPictureData
     var pixelCountX: CGFloat
     var pixelCountY: CGFloat
     let pixelSize: CGFloat = 16
@@ -17,17 +17,25 @@ struct PixelDrawingView: View {
     @State private var isVictory = false
     @Binding var currentSelectedColor: PaletteColor
     
-    @State private var boolArr: [[Int]] = [[Int]](repeating: [Int](repeating: 0, count: 16), count: 16)
+    @State private var memArr: [Int]
     @State private var shouldPan = true
     @State private var hapticTrigger = false
     @GestureState private var location: CGPoint = .zero
     
-    init(picture: PixelPictureDataModel, currentColor: Binding<PaletteColor>) {
+    init(picture: PixelPictureData, currentColor: Binding<PaletteColor>) {
         self.currentViewPixelPicture = picture
         pixelCountX = CGFloat(currentViewPixelPicture.width)
         pixelCountY = CGFloat(currentViewPixelPicture.height)
         self._currentSelectedColor = currentColor
+        self._memArr = State(initialValue: currentViewPixelPicture.pixelMemory)
+        print(currentViewPixelPicture.pixelMemory)
     }
+//    
+//    var body: some View {
+//        VStack{
+//            Text(String(memArr[Int(pixelCountY)]))
+//        }
+//    }
     
     var body: some View {
         let longPressGesture = LongPressGesture(minimumDuration: 0.3)
@@ -50,15 +58,15 @@ struct PixelDrawingView: View {
                 ForEach(1...Int(pixelCountY), id: \.self) { i in
                     GridRow {
                         ForEach(1...Int(pixelCountX), id: \.self) { j in
-                            PixelSquare(squareSize: pixelSize, isColored: $boolArr[i-1][j-1], colorNum: currentViewPixelPicture.getDataAt(x: i-1, y: j-1), currentColor: $currentSelectedColor)
+                            PixelSquare(squareSize: pixelSize, isColored: $memArr[(i-1) * Int(pixelCountY) + j-1], colorNum: currentViewPixelPicture.getDataAt(x: i-1, y: j-1), palette: currentViewPixelPicture.palette, currentColor: $currentSelectedColor)
                                 .gesture(fullGesture)
                                 .simultaneousGesture(TapGesture()
                                     .onEnded { _ in
                                         if (currentViewPixelPicture.getDataAt(x: i-1, y: j-1) == currentSelectedColor.id) {
-                                            boolArr[i-1][j-1] = -1
+                                            self.memArr[(i-1) * Int(pixelCountY) + j-1] = -currentSelectedColor.id
                                             self.victoryCheck()
-                                        } else if (self.boolArr[i-1][j-1] != -1){
-                                            boolArr[i-1][j-1] += 1
+                                        } else if (self.memArr[(i-1) * Int(pixelCountY) + j-1] >= 0){
+                                            self.memArr[(i-1) * Int(pixelCountY) + j-1] = currentSelectedColor.id
                                         }
                                     }
                                 )
@@ -82,26 +90,28 @@ struct PixelDrawingView: View {
            if geometry.frame(in: .global).contains(self.location) && !shouldPan && self.location != .zero {
                DispatchQueue.main.async {
                    if (currentViewPixelPicture.getDataAt(x: indexI-1, y: indexJ-1) == currentSelectedColor.id) {
-                       self.boolArr[indexI-1][indexJ-1] = -1
+                       self.memArr[(indexI-1) * Int(pixelCountY) + indexJ-1] = -currentSelectedColor.id
                        self.victoryCheck()
-                   } else if (self.boolArr[indexI-1][indexJ-1] != -1){
-                       self.boolArr[indexI-1][indexJ-1] += 1
+                   } else if (self.memArr[(indexI-1) * Int(pixelCountY) + indexJ-1] >= 0){
+                       self.memArr[(indexI-1) * Int(pixelCountY) + indexJ-1] = currentSelectedColor.id
                    }
                }
            }
            return AnyView(Rectangle().fill(Color.clear))
        }
     }
+    
+    
     func victoryCheck() {
+        print(memArr)
         var flag = true
-        for row in boolArr {
-            for item in row {
-                if item != -1 {flag = false}
-            }
+        for item in memArr {
+            if item >= 0 {flag = false}
         }
         if(flag) {
             isVictory = true
         }
     }
+    
 }
 

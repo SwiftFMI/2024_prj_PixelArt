@@ -35,7 +35,26 @@ let dummyData = [
     2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
 ]
 
-let dummyPictureModel: PixelPictureDataModel = PixelPictureDataModel(id: "asdid", name: "Dummy Picture", width: 16, height: 16, palette: dummyPalette, pixelData: dummyData)
+let dummyMemory = [
+    1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, -2,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 3, 4, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+]
+
+let dummyPictureModel: PixelPictureData = PixelPictureData(id: "id", name: "asdfgh", createdBy: "ivailos", createdOn: Date.now, width: 16, height: 16, palette: dummyPalette, pixelData: dummyData, pixelMemory: dummyMemory)
 
 struct MainMenuScreen: View {
     @EnvironmentObject var loggedUserVM: LoggedUserViewModel
@@ -51,9 +70,9 @@ struct MainMenuScreen: View {
             }
             Spacer().frame(height: 20)
             NavigationLink {
-                Text("Other Screen")
+                FreeDrawScreen()
             } label: {
-                Text("Go To Other Screen")
+                Text("Free Draw Screen")
             }
             Button(action: logoutUser) {
                 if isLoading {

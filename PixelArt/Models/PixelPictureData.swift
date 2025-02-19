@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import FirebaseFirestore
+import FirebaseFirestoreCombineSwift
 
 
 struct PixelPictureData: Codable {
@@ -17,6 +19,7 @@ struct PixelPictureData: Codable {
     let height: Int
     let palette: [PaletteColor]
     let pixelData: [Int]
+    let pixelMemory: [Int]
     
     init(id: String,
          name: String,
@@ -25,7 +28,8 @@ struct PixelPictureData: Codable {
          width: Int,
          height: Int,
          palette: [PaletteColor],
-         pixelData: [Int]) {
+         pixelData: [Int],
+         pixelMemory: [Int]) {
         
         self.id = id
         self.name = name
@@ -35,10 +39,15 @@ struct PixelPictureData: Codable {
         self.height = height
         self.palette = palette
         self.pixelData = pixelData
+        self.pixelMemory = pixelMemory
     }
     
     func getDataAt(x: Int, y: Int) -> Int {
         return pixelData[x * height + y]
+    }
+    
+    func getMemoryAt(x: Int, y: Int) -> Int {
+        return pixelMemory[x * height + y]
     }
     
 }

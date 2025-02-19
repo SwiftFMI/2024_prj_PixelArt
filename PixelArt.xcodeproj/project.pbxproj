@@ -66,10 +66,13 @@
 		F04278792D6509EE00AF9C7A /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = F04278782D6509EE00AF9C7A /* FirebasePerformance */; };
 		F042787B2D6509EE00AF9C7A /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = F042787A2D6509EE00AF9C7A /* FirebaseRemoteConfig */; };
 		F042787D2D6509EE00AF9C7A /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = F042787C2D6509EE00AF9C7A /* FirebaseStorage */; };
-		F04278832D650A9D00AF9C7A /* DataModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = F042787F2D650A9D00AF9C7A /* DataModels.swift */; };
 		F04278842D650A9D00AF9C7A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F04278802D650A9D00AF9C7A /* GoogleService-Info.plist */; };
 		F04278852D650A9D00AF9C7A /* PixelArtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04278812D650A9D00AF9C7A /* PixelArtApp.swift */; };
 		F04278862D650A9D00AF9C7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04278822D650A9D00AF9C7A /* ContentView.swift */; };
+		F0D066472D6673CD000CE843 /* PalleteColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D066462D6673CD000CE843 /* PalleteColor.swift */; };
+		F0D066492D6673D5000CE843 /* PixelPictureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D066482D6673D5000CE843 /* PixelPictureData.swift */; };
+		F0D0664C2D66744B000CE843 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0664B2D66744B000CE843 /* UIColorExtension.swift */; };
+		F0D0664F2D66827F000CE843 /* FreeDrawScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0664E2D66827F000CE843 /* FreeDrawScreen.swift */; };
 		F0D430532D652D24004A9ED9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D430522D652D24004A9ED9 /* User.swift */; };
 /* End PBXBuildFile section */
 
@@ -89,10 +92,13 @@
 		F035F8882D6516FD00B6C7B3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		F035F88A2D65170A00B6C7B3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F035F88C2D651B1300B6C7B3 /* PaletteSingleColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteSingleColorView.swift; sourceTree = "<group>"; };
-		F042787F2D650A9D00AF9C7A /* DataModels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModels.swift; sourceTree = "<group>"; };
 		F04278802D650A9D00AF9C7A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F04278812D650A9D00AF9C7A /* PixelArtApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelArtApp.swift; sourceTree = "<group>"; };
 		F04278822D650A9D00AF9C7A /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		F0D066462D6673CD000CE843 /* PalleteColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalleteColor.swift; sourceTree = "<group>"; };
+		F0D066482D6673D5000CE843 /* PixelPictureData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelPictureData.swift; sourceTree = "<group>"; };
+		F0D0664B2D66744B000CE843 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		F0D0664E2D66827F000CE843 /* FreeDrawScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeDrawScreen.swift; sourceTree = "<group>"; };
 		F0D430522D652D24004A9ED9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -173,6 +179,7 @@
 		F035F86A2D65129200B6C7B3 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				F0D0664D2D668239000CE843 /* FreeDrawScreen */,
 				F035F8702D65132E00B6C7B3 /* PixelPictureScreen */,
 				F035F86D2D6512E800B6C7B3 /* MainMenuScreen */,
 			);
@@ -253,23 +260,41 @@
 		F042787E2D650A5700AF9C7A /* PixelArt */ = {
 			isa = PBXGroup;
 			children = (
-				F035F8872D6516FD00B6C7B3 /* Preview Content */,
 				F035F88A2D65170A00B6C7B3 /* Assets.xcassets */,
-				F04278822D650A9D00AF9C7A /* ContentView.swift */,
-				F042787F2D650A9D00AF9C7A /* DataModels.swift */,
 				F04278802D650A9D00AF9C7A /* GoogleService-Info.plist */,
+				F04278822D650A9D00AF9C7A /* ContentView.swift */,
 				F04278812D650A9D00AF9C7A /* PixelArtApp.swift */,
+				F0D0664A2D66744B000CE843 /* Extensions */,
 				F0D430512D652D24004A9ED9 /* Models */,
 				F035F86B2D6512A500B6C7B3 /* ViewModels */,
 				F035F86A2D65129200B6C7B3 /* Screens */,
 				F035F86C2D6512AD00B6C7B3 /* Views */,
+				F035F8872D6516FD00B6C7B3 /* Preview Content */,
 			);
 			path = PixelArt;
+			sourceTree = "<group>";
+		};
+		F0D0664A2D66744B000CE843 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F0D0664B2D66744B000CE843 /* UIColorExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F0D0664D2D668239000CE843 /* FreeDrawScreen */ = {
+			isa = PBXGroup;
+			children = (
+				F0D0664E2D66827F000CE843 /* FreeDrawScreen.swift */,
+			);
+			path = FreeDrawScreen;
 			sourceTree = "<group>";
 		};
 		F0D430512D652D24004A9ED9 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F0D066482D6673D5000CE843 /* PixelPictureData.swift */,
+				F0D066462D6673CD000CE843 /* PalleteColor.swift */,
 				F0D430522D652D24004A9ED9 /* User.swift */,
 			);
 			path = Models;
@@ -397,6 +422,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0D0664C2D66744B000CE843 /* UIColorExtension.swift in Sources */,
+				F0D0664F2D66827F000CE843 /* FreeDrawScreen.swift in Sources */,
 				F035F8722D65135800B6C7B3 /* MainUnregisteredScreen.swift in Sources */,
 				F035F8792D65140F00B6C7B3 /* LoginView.swift in Sources */,
 				F04278852D650A9D00AF9C7A /* PixelArtApp.swift in Sources */,
@@ -404,13 +431,14 @@
 				F035F86F2D65130C00B6C7B3 /* MainMenuScreen.swift in Sources */,
 				F035F8802D65149B00B6C7B3 /* PixelDrawingView.swift in Sources */,
 				F035F87E2D65147F00B6C7B3 /* PaletteView.swift in Sources */,
+				F0D066472D6673CD000CE843 /* PalleteColor.swift in Sources */,
 				F035F8862D65151E00B6C7B3 /* LoggedUserViewModel.swift in Sources */,
+				F0D066492D6673D5000CE843 /* PixelPictureData.swift in Sources */,
 				F0D430532D652D24004A9ED9 /* User.swift in Sources */,
 				F035F8822D6514A800B6C7B3 /* PixelView.swift in Sources */,
 				F035F87B2D65141900B6C7B3 /* SignUpView.swift in Sources */,
 				F035F88D2D651B1300B6C7B3 /* PaletteSingleColorView.swift in Sources */,
 				F035F8742D65136900B6C7B3 /* PixelPictureScreen.swift in Sources */,
-				F04278832D650A9D00AF9C7A /* DataModels.swift in Sources */,
 				F04278862D650A9D00AF9C7A /* ContentView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
