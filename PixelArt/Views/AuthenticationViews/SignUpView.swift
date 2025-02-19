@@ -5,7 +5,7 @@ struct SignUpView: View {
     @State private var username: String = ""
     @State private var password: String = ""
     @State private var isLoading: Bool = false
-    @StateObject var loggedUserVM = LoggedUserViewModel()
+    @EnvironmentObject var loggedUserVM: LoggedUserViewModel
     
     var body: some View {
         VStack {
@@ -60,6 +60,7 @@ struct SignUpView: View {
         Task {
             try await loggedUserVM.register(username: username, email: email, password: password)
             isLoading = false
+            ContentView()
         }
     }
 }

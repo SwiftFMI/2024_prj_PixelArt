@@ -38,6 +38,8 @@ let dummyData = [
 let dummyPictureModel: PixelPictureDataModel = PixelPictureDataModel(id: "asdid", name: "Dummy Picture", width: 16, height: 16, palette: dummyPalette, pixelData: dummyData)
 
 struct MainMenuScreen: View {
+    @EnvironmentObject var loggedUserVM: LoggedUserViewModel
+    @State private var isLoading: Bool = false
     
     var body: some View {
         
@@ -53,7 +55,31 @@ struct MainMenuScreen: View {
             } label: {
                 Text("Go To Other Screen")
             }
+            Button(action: logoutUser) {
+                if isLoading {
+                    ProgressView()
+                } else {
+                    Text("Log out")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.blue)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+            }
+            .padding(.horizontal, 40)
+            .disabled(isLoading)
+            
         }
         .navigationTitle("PixelDraw")
+    }
+    
+    private func logoutUser() {
+        isLoading = true
+        Task {
+            try await loggedUserVM.logOut()
+            isLoading = false
+            ContentView()
+        }
     }
 }

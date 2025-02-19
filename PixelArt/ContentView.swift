@@ -8,13 +8,17 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var loggedUserVM: LoggedUserViewModel
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+            if loggedUserVM.session != nil {
+                NavigationStack {
+                    MainMenuScreen()
+                }
+            } else {
+                MainUnregisteredScreen()
+            }
         }
-        .padding()
     }
 }

@@ -26,11 +26,7 @@ class LoggedUserViewModel: ObservableObject {
     
     private func getUserData(uid: String) async {
         do {
-            //let snapshot = try await db.collection(self.usersCollectionName).getDocument(uid)
-            let snapshot = try await db.collection(self.usersCollectionName).document(uid).getDocument(completion: { document, error in
-                print("completed")
-            })
-            //self.user = try snapshot
+            self.user = try await db.collection(self.usersCollectionName).document(uid).getDocument(as: User.self)
         } catch {
             authError = "Failed to sign in: \(error.localizedDescription)"
         }

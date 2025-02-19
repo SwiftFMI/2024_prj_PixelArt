@@ -10,7 +10,6 @@ import Firebase
 
 @main
 struct PixelArtApp: App {
-    
     @StateObject var loggedUserVM = LoggedUserViewModel()
     
     init() {
@@ -19,16 +18,8 @@ struct PixelArtApp: App {
     
     var body: some Scene {
         WindowGroup {
-            VStack {
-                if loggedUserVM.session != nil {
-                    NavigationStack {
-                        MainMenuScreen()
-                    }
-                } else {
-                    MainUnregisteredScreen()
-                }
-            }
-            .environmentObject(loggedUserVM)
+            ContentView()
         }
+        .environmentObject(loggedUserVM)
     }
 }
