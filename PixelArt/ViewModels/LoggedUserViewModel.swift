@@ -6,6 +6,7 @@ class LoggedUserViewModel: ObservableObject {
     @Published var session: FirebaseAuth.User?
     @Published var user: User?
     @Published var authError: String?
+    @Published var userPictures: [PixelPictureData] = []
     
     let db = Firestore.firestore()
     let usersCollectionName = "users"
@@ -57,6 +58,44 @@ class LoggedUserViewModel: ObservableObject {
             authError = "Failed to log out: \(error.localizedDescription)"
         }
     }
+    
+    func savePictureForCurrentUser(picture: PixelPictureData) {
+            guard let uid = session?.uid else {
+                authError = "User is not authenticated."
+                return
+            }
+            
+            do {
+                let documentRef = db.collection(usersCollectionName)
+                    .document(uid)
+                    .collection("startedPictures")
+                    .document(picture.id)
+                
+                try documentRef.setData(from: picture)
+            } catch {
+                authError = "Failed to save picture: \(error.localizedDescription)"
+            }
+        }
+    
+    func fetchUserPictures() async {
+            guard let uid = session?.uid else {
+                authError = "User is not authenticated."
+                return
+            }
+            
+            do {
+                let snapshot = try await db.collection(usersCollectionName)
+                    .document(uid)
+                    .collection("startedPictures")
+                    .getDocuments()
+                
+                self.userPictures = try snapshot.documents.compactMap {
+                    try $0.data(as: PixelPictureData.self)
+                }
+            } catch {
+                authError = "Failed to fetch pictures: \(error.localizedDescription)"
+            }
+        }
     
     func resetErrorStatus() {
         authError = ""
