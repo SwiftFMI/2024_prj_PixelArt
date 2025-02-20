@@ -7,11 +7,9 @@
 
 import SwiftUI
 import FirebaseFirestore
-import FirebaseFirestoreCombineSwift
 
-
-struct PixelPictureData: Codable {
-    let id: String
+struct PixelPictureData: Codable, Identifiable {
+    var id: String
     let name: String
     let createdBy: String
     let createdOn: Date
@@ -41,6 +39,12 @@ struct PixelPictureData: Codable {
         self.pixelData = pixelData
         self.pixelMemory = pixelMemory
     }
+    
+    static func generateFirestoreID() -> String {
+        let characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+        return String((0..<20).map { _ in characters.randomElement()! })
+    }
+
     
     func getDataAt(x: Int, y: Int) -> Int {
         return pixelData[x * height + y]

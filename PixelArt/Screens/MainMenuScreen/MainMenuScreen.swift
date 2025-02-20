@@ -96,11 +96,7 @@ struct MainMenuScreen: View {
     }
     
     private func logoutUser() {
-        isLoading = true
-        Task {
-            try await loggedUserVM.logOut()
-            isLoading = false
-            ContentView()
-        }
+        loggedUserVM.logOut()
+        ContentView()
     }
 }

@@ -59,6 +59,7 @@ struct SignUpView: View {
         isLoading = true
         Task {
             try await loggedUserVM.register(username: username, email: email, password: password)
+            loggedUserVM.resetErrorStatus()
             isLoading = false
             ContentView()
         }
