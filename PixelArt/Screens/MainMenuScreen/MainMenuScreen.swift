@@ -17,7 +17,7 @@ let dummyPalette = [
 ]
 
 let dummyData = [
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
+    6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1,
     1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
@@ -70,7 +70,9 @@ struct MainMenuScreen: View {
             }
             Spacer().frame(height: 20)
             NavigationLink {
-                FreeDrawScreen()
+                FreeDrawScreen(width: 16, height: 16, completionHandler: { pixelPictureData in
+                    print(pixelPictureData)
+                })
             } label: {
                 Text("Free Draw Screen")
             }

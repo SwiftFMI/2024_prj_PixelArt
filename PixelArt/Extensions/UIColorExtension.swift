@@ -27,6 +27,8 @@ extension UIColor {
     }
 
     func toHexString() -> String {
+        // band-aid fix dor white color
+        if (self == .white) {return String("#FFFFFF")}
         guard let components = cgColor.components, components.count >= 3 else { return "#000000" }
         let r = Int(components[0] * 255)
         let g = Int(components[1] * 255)
