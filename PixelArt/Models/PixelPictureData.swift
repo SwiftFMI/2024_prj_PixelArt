@@ -8,7 +8,6 @@
 import SwiftUI
 import FirebaseFirestore
 
-
 struct PixelPictureData: Codable, Identifiable {
     var id: String
     let name: String
@@ -18,6 +17,7 @@ struct PixelPictureData: Codable, Identifiable {
     let height: Int
     let palette: [PaletteColor]
     let pixelData: [Int]
+    let pixelMemory: [Int]
     
     init(id: String,
          name: String,
@@ -26,7 +26,8 @@ struct PixelPictureData: Codable, Identifiable {
          width: Int,
          height: Int,
          palette: [PaletteColor],
-         pixelData: [Int]) {
+         pixelData: [Int],
+         pixelMemory: [Int]) {
         
         self.id = id
         self.name = name
@@ -36,6 +37,7 @@ struct PixelPictureData: Codable, Identifiable {
         self.height = height
         self.palette = palette
         self.pixelData = pixelData
+        self.pixelMemory = pixelMemory
     }
     
     static func generateFirestoreID() -> String {
@@ -46,6 +48,10 @@ struct PixelPictureData: Codable, Identifiable {
     
     func getDataAt(x: Int, y: Int) -> Int {
         return pixelData[x * height + y]
+    }
+    
+    func getMemoryAt(x: Int, y: Int) -> Int {
+        return pixelMemory[x * height + y]
     }
     
 }

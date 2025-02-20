@@ -15,7 +15,11 @@ struct PaletteSingeColorView: View {
     
     init(color: PaletteColor, selectedColor: Binding<PaletteColor>) {
         self.color = color
-        self.contrastColor = color.color.contrastColor()
+        if let col = UIColor(hex: color.color) {
+            self.contrastColor = col.contrastColor()
+        } else {
+            self.contrastColor = .white
+        }
         self._selectedColor = selectedColor
     }
     
@@ -26,7 +30,7 @@ struct PaletteSingeColorView: View {
                 .border(Color(uiColor: contrastColor), width: selectedColor.id == color.id ? 5 : 0)
                 .font(.system(size: 28))
                 .foregroundColor(Color(uiColor: contrastColor))
-                .background(Color(uiColor: color.color))
+                .background(Color(uiColor: UIColor(hex: color.color)!))
         }
     }
     

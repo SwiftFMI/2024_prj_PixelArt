@@ -10,12 +10,14 @@ import SwiftUI
 
 
 struct PixelPictureScreen: View {
-    let currentScreenPixelPicture: PixelPictureDataModel
-    @State var currentSelectedColor: PaletteColor
+    let currentScreenPixelPicture: PixelPictureData
+    @State var currentSelectedColor: PaletteColor = PaletteColor(id: 1, color: .red)
 
-    init(picture: PixelPictureDataModel) {
+    init(picture: PixelPictureData) {
         self.currentScreenPixelPicture = picture
-        self.currentSelectedColor = picture.palette.first ?? PaletteColor(id: 1, color: UIColor.red)
+        self.currentSelectedColor = PaletteColor(id: 1, color: .red)
+        self.currentSelectedColor = picture.palette.first ?? PaletteColor(id: 1, color: .red)
+        
     }
     var body: some View {
         ZStack {
