@@ -70,6 +70,8 @@
 		F04278852D650A9D00AF9C7A /* PixelArtApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04278812D650A9D00AF9C7A /* PixelArtApp.swift */; };
 		F04278862D650A9D00AF9C7A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04278822D650A9D00AF9C7A /* ContentView.swift */; };
 		F0A414CA2D66BB7900E8278B /* FreeDrawConfirmationScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A414C92D66BB7900E8278B /* FreeDrawConfirmationScreen.swift */; };
+		F0A414D22D6792FB00E8278B /* PixelArtsGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A414D12D6792FB00E8278B /* PixelArtsGridView.swift */; };
+		F0A414D42D67936D00E8278B /* PixelArtsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0A414D32D67936D00E8278B /* PixelArtsViewModel.swift */; };
 		F0D066472D6673CD000CE843 /* PalleteColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D066462D6673CD000CE843 /* PalleteColor.swift */; };
 		F0D066492D6673D5000CE843 /* PixelPictureData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D066482D6673D5000CE843 /* PixelPictureData.swift */; };
 		F0D0664C2D66744B000CE843 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0D0664B2D66744B000CE843 /* UIColorExtension.swift */; };
@@ -99,6 +101,8 @@
 		F04278812D650A9D00AF9C7A /* PixelArtApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelArtApp.swift; sourceTree = "<group>"; };
 		F04278822D650A9D00AF9C7A /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		F0A414C92D66BB7900E8278B /* FreeDrawConfirmationScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeDrawConfirmationScreen.swift; sourceTree = "<group>"; };
+		F0A414D12D6792FB00E8278B /* PixelArtsGridView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelArtsGridView.swift; sourceTree = "<group>"; };
+		F0A414D32D67936D00E8278B /* PixelArtsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelArtsViewModel.swift; sourceTree = "<group>"; };
 		F0D066462D6673CD000CE843 /* PalleteColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PalleteColor.swift; sourceTree = "<group>"; };
 		F0D066482D6673D5000CE843 /* PixelPictureData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixelPictureData.swift; sourceTree = "<group>"; };
 		F0D0664B2D66744B000CE843 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
@@ -196,6 +200,7 @@
 		F035F86B2D6512A500B6C7B3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				F0A414D32D67936D00E8278B /* PixelArtsViewModel.swift */,
 				F035F8852D65151E00B6C7B3 /* LoggedUserViewModel.swift */,
 			);
 			path = ViewModels;
@@ -204,6 +209,7 @@
 		F035F86C2D6512AD00B6C7B3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F0A414D02D6792FB00E8278B /* PixelPictureGridView */,
 				F0D066502D66A401000CE843 /* FreeDrawingView */,
 				F035F8752D6513AE00B6C7B3 /* AuthenticationViews */,
 				F035F8772D6513B800B6C7B3 /* ColorPickerView */,
@@ -288,6 +294,14 @@
 				F0A414C92D66BB7900E8278B /* FreeDrawConfirmationScreen.swift */,
 			);
 			path = FreeDrawConfirmationScreen;
+			sourceTree = "<group>";
+		};
+		F0A414D02D6792FB00E8278B /* PixelPictureGridView */ = {
+			isa = PBXGroup;
+			children = (
+				F0A414D12D6792FB00E8278B /* PixelArtsGridView.swift */,
+			);
+			path = PixelPictureGridView;
 			sourceTree = "<group>";
 		};
 		F0D0664A2D66744B000CE843 /* Extensions */ = {
@@ -450,6 +464,7 @@
 				F0D0664C2D66744B000CE843 /* UIColorExtension.swift in Sources */,
 				F0D0664F2D66827F000CE843 /* FreeDrawScreen.swift in Sources */,
 				F035F8722D65135800B6C7B3 /* MainUnregisteredScreen.swift in Sources */,
+				F0A414D22D6792FB00E8278B /* PixelArtsGridView.swift in Sources */,
 				F035F8792D65140F00B6C7B3 /* LoginView.swift in Sources */,
 				F04278852D650A9D00AF9C7A /* PixelArtApp.swift in Sources */,
 				F035F8842D6514B500B6C7B3 /* ZoomPanView.swift in Sources */,
@@ -466,6 +481,7 @@
 				F035F87B2D65141900B6C7B3 /* SignUpView.swift in Sources */,
 				F0D066542D66A70F000CE843 /* FreeDrawingPixelView.swift in Sources */,
 				F035F88D2D651B1300B6C7B3 /* PaletteSingleColorView.swift in Sources */,
+				F0A414D42D67936D00E8278B /* PixelArtsViewModel.swift in Sources */,
 				F035F8742D65136900B6C7B3 /* PixelPictureScreen.swift in Sources */,
 				F04278862D650A9D00AF9C7A /* ContentView.swift in Sources */,
 			);

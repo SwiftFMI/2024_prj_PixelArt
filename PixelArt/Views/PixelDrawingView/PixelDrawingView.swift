@@ -17,17 +17,17 @@ struct PixelDrawingView: View {
     @State private var isVictory = false
     @Binding var currentSelectedColor: PaletteColor
     
-    @State private var memArr: [Int]
+    @Binding private var memArr: [Int]
     @State private var shouldPan = true
     @State private var hapticTrigger = false
     @GestureState private var location: CGPoint = .zero
     
-    init(picture: PixelPictureData, currentColor: Binding<PaletteColor>) {
+    init(picture: PixelPictureData, currentColor: Binding<PaletteColor>, memArr: Binding<[Int]>) {
         self.currentViewPixelPicture = picture
         pixelCountX = CGFloat(currentViewPixelPicture.width)
         pixelCountY = CGFloat(currentViewPixelPicture.height)
         self._currentSelectedColor = currentColor
-        self._memArr = State(initialValue: currentViewPixelPicture.pixelMemory)
+        self._memArr = memArr
     }
     
     var body: some View {
