@@ -58,6 +58,24 @@ class LoggedUserViewModel: ObservableObject {
         }
     }
     
+    func savePictureForCurrentUser(picture: PixelPictureData) {
+            guard let uid = session?.uid else {
+                authError = "User is not authenticated."
+                return
+            }
+            
+            do {
+                let documentRef = db.collection(usersCollectionName)
+                    .document(uid)
+                    .collection("startedPictures")
+                    .document(picture.id)
+                
+                try documentRef.setData(from: picture)
+            } catch {
+                authError = "Failed to save picture: \(error.localizedDescription)"
+            }
+        }
+    
     func resetErrorStatus() {
         authError = ""
     }
