@@ -7,61 +7,10 @@
 
 import SwiftUI
 
-let dummyPalette = [
-    PaletteColor(id: 1, color: UIColor.red),
-    PaletteColor(id: 2, color: UIColor.yellow),
-    PaletteColor(id: 3, color: UIColor.black),
-    PaletteColor(id: 4, color: UIColor.blue),
-    PaletteColor(id: 5, color: UIColor.green),
-    PaletteColor(id: 6, color: UIColor.purple)
-]
-
-let dummyData = [
-    6, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 3, 3, 3, 3, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 3, 3, 3, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 3, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,
-    2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2
-]
-
-let dummyMemory = [
-    1, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 0, 0, 0, -2,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 3, 4, 5, 6, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    -1, -1, -1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-]
-
-let dummyPictureModel: PixelPictureData = PixelPictureData(id: "id", name: "asdfgh", createdBy: "ivailos", createdOn: Date.now, width: 16, height: 16, palette: dummyPalette, pixelData: dummyData, pixelMemory: dummyMemory)
-
 struct MainMenuScreen: View {
     @EnvironmentObject var loggedUserVM: LoggedUserViewModel
     @EnvironmentObject var picturesVM: PixelArtsViewModel
     @State private var isLoading: Bool = false
-    @State private var selectedSize: String = "8x8"
-    @State private var navigateToFreeDraw = false
     
     private let sizeOptions = ["2x2", "4x4", "8x8", "16x16", "32x32"]
     
@@ -82,10 +31,12 @@ struct MainMenuScreen: View {
                 
                 Menu {
                     ForEach(sizeOptions, id: \.self) { option in
-                        Button(action: {
-                            selectedSize = option
-                            navigateToFreeDraw = true
-                        }) {
+                        NavigationLink {
+                            FreeDrawScreen(
+                                width: getWidth(from: option),
+                                height: getHeight(from: option)
+                            )
+                        } label: {
                             Text(option)
                         }
                     }
@@ -117,18 +68,6 @@ struct MainMenuScreen: View {
                 .disabled(isLoading)
             }
             .navigationTitle("PixelDraw")
-            .background(
-                NavigationLink(
-                    destination: FreeDrawScreen(
-                        width: getWidth(from: selectedSize),
-                        height: getHeight(from: selectedSize)
-                    ),
-                    isActive: $navigateToFreeDraw
-                ) {
-                    EmptyView()
-                }
-                    .hidden()
-            )
         }
     }
     
