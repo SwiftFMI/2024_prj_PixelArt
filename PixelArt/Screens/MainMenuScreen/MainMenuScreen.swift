@@ -60,10 +60,14 @@ struct MainMenuScreen: View {
     @EnvironmentObject var loggedUserVM: LoggedUserViewModel
     @EnvironmentObject var picturesVM: PixelArtsViewModel
     @State private var isLoading: Bool = false
+    @State private var selectedSize: String = "8x8"
+    @State private var navigateToFreeDraw = false
+    
+    private let sizeOptions = ["2x2", "4x4", "8x8", "16x16", "32x32"]
     
     var body: some View {
         NavigationStack {
-            VStack {    
+            VStack {
                 NavigationLink(destination: PixelArtsGridView()) {
                     Text("Colour a pixel art!")
                         .frame(maxWidth: .infinity)
@@ -73,10 +77,19 @@ struct MainMenuScreen: View {
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 40)
-
+                
                 Spacer().frame(height: 20)
-
-                NavigationLink(destination: FreeDrawScreen()) {
+                
+                Menu {
+                    ForEach(sizeOptions, id: \.self) { option in
+                        Button(action: {
+                            selectedSize = option
+                            navigateToFreeDraw = true
+                        }) {
+                            Text(option)
+                        }
+                    }
+                } label: {
                     Text("Create your own pixel art")
                         .frame(maxWidth: .infinity)
                         .padding()
@@ -85,9 +98,9 @@ struct MainMenuScreen: View {
                         .cornerRadius(10)
                 }
                 .padding(.horizontal, 40)
-
+                
                 Spacer().frame(height: 20)
-
+                
                 Button(action: logoutUser) {
                     if isLoading {
                         ProgressView()
@@ -104,7 +117,27 @@ struct MainMenuScreen: View {
                 .disabled(isLoading)
             }
             .navigationTitle("PixelDraw")
+            .background(
+                NavigationLink(
+                    destination: FreeDrawScreen(
+                        width: getWidth(from: selectedSize),
+                        height: getHeight(from: selectedSize)
+                    ),
+                    isActive: $navigateToFreeDraw
+                ) {
+                    EmptyView()
+                }
+                    .hidden()
+            )
         }
+    }
+    
+    private func getWidth(from option: String) -> Int {
+        return Int(option.components(separatedBy: "x").first ?? "8") ?? 8
+    }
+    
+    private func getHeight(from option: String) -> Int {
+        return Int(option.components(separatedBy: "x").last ?? "8") ?? 8
     }
     
     private func logoutUser() {
