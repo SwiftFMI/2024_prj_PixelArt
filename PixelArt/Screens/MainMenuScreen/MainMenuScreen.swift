@@ -58,45 +58,57 @@ let dummyPictureModel: PixelPictureData = PixelPictureData(id: "id", name: "asdf
 
 struct MainMenuScreen: View {
     @EnvironmentObject var loggedUserVM: LoggedUserViewModel
+    @EnvironmentObject var picturesVM: PixelArtsViewModel
     @State private var isLoading: Bool = false
     
     var body: some View {
-        
-        VStack {
-            NavigationLink {
-                PixelPictureScreen(picture: dummyPictureModel)
-            } label: {
-                Text("Start Dummy Game")
-            }
-            Spacer().frame(height: 20)
-            NavigationLink {
-                FreeDrawScreen(width: 16, height: 16, completionHandler: { pixelPictureData in
-                    print(pixelPictureData)
-                })
-            } label: {
-                Text("Free Draw Screen")
-            }
-            Button(action: logoutUser) {
-                if isLoading {
-                    ProgressView()
-                } else {
-                    Text("Log out")
+        NavigationStack {
+            VStack {    
+                NavigationLink(destination: PixelArtsGridView()) {
+                    Text("Colour a pixel art!")
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color.blue)
+                        .background(Color.green)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
+                .padding(.horizontal, 40)
+
+                Spacer().frame(height: 20)
+
+                NavigationLink(destination: FreeDrawScreen()) {
+                    Text("Create your own pixel art")
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.orange)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                }
+                .padding(.horizontal, 40)
+
+                Spacer().frame(height: 20)
+
+                Button(action: logoutUser) {
+                    if isLoading {
+                        ProgressView()
+                    } else {
+                        Text("Log out")
+                            .frame(maxWidth: .infinity)
+                            .padding()
+                            .background(Color.blue)
+                            .foregroundColor(.white)
+                            .cornerRadius(10)
+                    }
+                }
+                .padding(.horizontal, 40)
+                .disabled(isLoading)
             }
-            .padding(.horizontal, 40)
-            .disabled(isLoading)
-            
+            .navigationTitle("PixelDraw")
         }
-        .navigationTitle("PixelDraw")
     }
     
     private func logoutUser() {
         loggedUserVM.logOut()
-        ContentView()
     }
 }
+

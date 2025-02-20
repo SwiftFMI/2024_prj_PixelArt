@@ -7,6 +7,7 @@
 import SwiftUI
 import FirebaseFirestore
 
+@MainActor
 class PixelArtsViewModel: ObservableObject {
     @Published var items: [PixelPictureData] = []
     @Published var hasMoreData = true

@@ -1,6 +1,7 @@
 import FirebaseAuth
 import FirebaseFirestore
 
+@MainActor
 class LoggedUserViewModel: ObservableObject {
     @Published var session: FirebaseAuth.User?
     @Published var user: User?
